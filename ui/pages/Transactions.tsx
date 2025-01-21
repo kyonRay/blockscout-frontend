@@ -31,7 +31,11 @@ const TAB_LIST_PROPS = {
 };
 const TABS_HEIGHT = 88;
 
-const Transactions = () => {
+type Props = {
+  showSocketInfo?: boolean;
+};
+
+const Transactions = ({ showSocketInfo = false }: Props) => {
   const verifiedTitle = capitalize(getNetworkValidationActionText());
   const router = useRouter();
   const isMobile = useIsMobile();
@@ -100,7 +104,7 @@ const Transactions = () => {
       component:
         <TxsWithFrontendSorting
           query={ txsValidatedQuery }
-          showSocketInfo={ txsValidatedQuery.pagination.page === 1 }
+          showSocketInfo={ txsValidatedQuery.pagination.page === 1 && showSocketInfo }
           socketInfoNum={ num }
           socketInfoAlert={ socketAlert }
           top={ TABS_HEIGHT }
@@ -112,7 +116,7 @@ const Transactions = () => {
         <TxsWithFrontendSorting
           query={ txsPendingQuery }
           showBlockInfo={ false }
-          showSocketInfo={ txsPendingQuery.pagination.page === 1 }
+          showSocketInfo={ txsPendingQuery.pagination.page === 1 && showSocketInfo }
           socketInfoNum={ num }
           socketInfoAlert={ socketAlert }
           top={ TABS_HEIGHT }
@@ -125,7 +129,7 @@ const Transactions = () => {
       component: (
         <TxsWithFrontendSorting
           query={ txsWithBlobsQuery }
-          showSocketInfo={ txsWithBlobsQuery.pagination.page === 1 }
+          showSocketInfo={ txsWithBlobsQuery.pagination.page === 1 && showSocketInfo }
           socketInfoNum={ num }
           socketInfoAlert={ socketAlert }
           top={ TABS_HEIGHT }

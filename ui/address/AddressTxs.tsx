@@ -50,11 +50,12 @@ type Props = {
   scrollRef?: React.RefObject<HTMLDivElement>;
   shouldRender?: boolean;
   isQueryEnabled?: boolean;
+  showSocketInfo?: boolean;
   // for tests only
   overloadCount?: number;
 };
 
-const AddressTxs = ({ scrollRef, overloadCount = OVERLOAD_COUNT, shouldRender = true, isQueryEnabled = true }: Props) => {
+const AddressTxs = ({ scrollRef, overloadCount = OVERLOAD_COUNT, shouldRender = true, isQueryEnabled = true, showSocketInfo = false }: Props) => {
   const router = useRouter();
   const queryClient = useQueryClient();
   const isMounted = useIsMounted();
@@ -198,7 +199,7 @@ const AddressTxs = ({ scrollRef, overloadCount = OVERLOAD_COUNT, shouldRender = 
         query={ addressTxsQuery }
         currentAddress={ typeof currentAddress === 'string' ? currentAddress : undefined }
         enableTimeIncrement
-        showSocketInfo={ addressTxsQuery.pagination.page === 1 }
+        showSocketInfo={ addressTxsQuery.pagination.page === 1 && showSocketInfo }
         socketInfoAlert={ socketAlert }
         socketInfoNum={ newItemsCount }
         top={ ACTION_BAR_HEIGHT_DESKTOP }

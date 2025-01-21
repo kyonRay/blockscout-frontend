@@ -51,6 +51,10 @@ const AddressCoinBalance = ({ shouldRender = true, isQueryEnabled = true }: Prop
     },
   });
 
+  const handleSocketClose = React.useCallback(() => {
+    setSocketAlert(false);
+  }, []);
+
   const handleSocketError = React.useCallback(() => {
     setSocketAlert(true);
   }, []);
@@ -77,7 +81,7 @@ const AddressCoinBalance = ({ shouldRender = true, isQueryEnabled = true }: Prop
 
   const channel = useSocketChannel({
     topic: `addresses:${ addressHash.toLowerCase() }`,
-    onSocketClose: handleSocketError,
+    onSocketClose: handleSocketClose,
     onSocketError: handleSocketError,
     isDisabled: !addressHash || coinBalanceQuery.isPlaceholderData || coinBalanceQuery.pagination.page !== 1,
   });

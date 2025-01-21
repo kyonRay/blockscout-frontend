@@ -14,7 +14,11 @@ import SocketNewItemsNotice from 'ui/shared/SocketNewItemsNotice';
 import LatestTxsItem from './LatestTxsItem';
 import LatestTxsItemMobile from './LatestTxsItemMobile';
 
-const LatestTransactions = () => {
+type Props = {
+  showSocketInfo?: boolean;
+};
+
+const LatestTransactions = ({ showSocketInfo = false }: Props) => {
   const isMobile = useIsMobile();
   const txsCount = isMobile ? 2 : 6;
   const { data, isPlaceholderData, isError } = useApiQuery('homepage_txs', {
@@ -33,7 +37,7 @@ const LatestTransactions = () => {
     const txsUrl = route({ pathname: '/txs' });
     return (
       <>
-        <SocketNewItemsNotice borderBottomRadius={ 0 } url={ txsUrl } num={ num } alert={ socketAlert } isLoading={ isPlaceholderData }/>
+        { showSocketInfo && <SocketNewItemsNotice borderBottomRadius={ 0 } url={ txsUrl } num={ num } alert={ socketAlert } isLoading={ isPlaceholderData }/> }
         <Box mb={ 3 } display={{ base: 'block', lg: 'none' }}>
           { data.slice(0, txsCount).map(((tx, index) => (
             <LatestTxsItemMobile
