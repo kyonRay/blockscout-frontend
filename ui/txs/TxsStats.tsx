@@ -36,7 +36,7 @@ const TxsStats = () => {
   return (
     <Box
       display="grid"
-      gridTemplateColumns={{ base: '1fr', lg: 'repeat(4, calc(25% - 9px))' }}
+      gridTemplateColumns={{ base: '1fr', lg: 'repeat(auto-fit, minmax(calc(25% - 9px), 1fr))' }}
       rowGap={ 3 }
       columnGap={ 3 }
       mb={ 6 }
@@ -54,26 +54,30 @@ const TxsStats = () => {
         period="1h"
         isLoading={ txsStatsQuery.isPlaceholderData }
       />
-      <StatsWidget
-        label="Transactions fees"
-        value={
-          (Number(txsStatsQuery.data?.transaction_fees_sum_24h) / (10 ** config.chain.currency.decimals))
-            .toLocaleString(undefined, { maximumFractionDigits: 2 })
-        }
-        valuePostfix={ thinsp + config.chain.currency.symbol }
-        period="24h"
-        isLoading={ txsStatsQuery.isPlaceholderData }
-        href={ config.features.stats.isEnabled ? { pathname: '/stats/[id]', query: { id: 'txnsFee' } } : undefined }
-      />
-      <StatsWidget
-        label="Avg. transaction fee"
-        value={ txFeeAvg.usd ? txFeeAvg.usd : txFeeAvg.valueStr }
-        valuePrefix={ txFeeAvg.usd ? '$' : undefined }
-        valuePostfix={ txFeeAvg.usd ? undefined : thinsp + config.chain.currency.symbol }
-        period="24h"
-        isLoading={ txsStatsQuery.isPlaceholderData }
-        href={ config.features.stats.isEnabled ? { pathname: '/stats/[id]', query: { id: 'averageTxnFee' } } : undefined }
-      />
+      { !config.UI.views.tx.hiddenFields?.transactions_fees && (
+        <StatsWidget
+          label="Transactions fees"
+          value={
+            (Number(txsStatsQuery.data?.transaction_fees_sum_24h) / (10 ** config.chain.currency.decimals))
+              .toLocaleString(undefined, { maximumFractionDigits: 2 })
+          }
+          valuePostfix={ thinsp + config.chain.currency.symbol }
+          period="24h"
+          isLoading={ txsStatsQuery.isPlaceholderData }
+          href={ config.features.stats.isEnabled ? { pathname: '/stats/[id]', query: { id: 'txnsFee' } } : undefined }
+        />
+      ) }
+      { !config.UI.views.tx.hiddenFields?.avg_transaction_fee && (
+        <StatsWidget
+          label="Avg. transaction fee"
+          value={ txFeeAvg.usd ? txFeeAvg.usd : txFeeAvg.valueStr }
+          valuePrefix={ txFeeAvg.usd ? '$' : undefined }
+          valuePostfix={ txFeeAvg.usd ? undefined : thinsp + config.chain.currency.symbol }
+          period="24h"
+          isLoading={ txsStatsQuery.isPlaceholderData }
+          href={ config.features.stats.isEnabled ? { pathname: '/stats/[id]', query: { id: 'averageTxnFee' } } : undefined }
+        />
+      ) }
     </Box>
   );
 };
