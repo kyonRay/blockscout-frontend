@@ -51,13 +51,12 @@ export default function useNavItems(): ReturnType {
       isActive: pathname === '/ops' || pathname === '/op/[hash]',
     } : null;
 
-    const verifiedContracts: NavItem | null =
-     {
-       text: 'Verified contracts',
-       nextRoute: { pathname: '/verified-contracts' as const },
-       icon: 'verified',
-       isActive: pathname === '/verified-contracts',
-     };
+    const verifiedContracts: NavItem | null = config.features.verifiedContracts.isEnabled ? {
+      text: 'Verified contracts',
+      nextRoute: { pathname: '/verified-contracts' as const },
+      icon: 'verified',
+      isActive: pathname === '/verified-contracts',
+    } : null;
     const ensLookup = config.features.nameService.isEnabled ? {
       text: 'Name services lookup',
       nextRoute: { pathname: '/name-domains' as const },
@@ -185,13 +184,13 @@ export default function useNavItems(): ReturnType {
     }
 
     const tokensNavItems = [
-      {
+      config.features.tokens.isEnabled && {
         text: 'Tokens',
         nextRoute: { pathname: '/tokens' as const },
         icon: 'token',
         isActive: pathname === '/tokens' || pathname.startsWith('/token/'),
       },
-      {
+      config.features.tokenTransfers.isEnabled && {
         text: 'Token transfers',
         nextRoute: { pathname: '/token-transfers' as const },
         icon: 'token-transfers',
@@ -231,7 +230,7 @@ export default function useNavItems(): ReturnType {
     ].filter(Boolean);
 
     const otherNavItems: Array<NavItem> | Array<Array<NavItem>> = [
-      {
+      config.features.contractVerification.isEnabled && {
         text: 'Verify contract',
         nextRoute: { pathname: '/contract-verification' as const },
         isActive: pathname.startsWith('/contract-verification'),
@@ -256,7 +255,7 @@ export default function useNavItems(): ReturnType {
         isActive: blockchainNavItems.flat().some(item => isInternalItem(item) && item.isActive),
         subItems: blockchainNavItems,
       },
-      {
+      tokensNavItems.length > 0 && {
         text: 'Tokens',
         icon: 'token',
         isActive: tokensNavItems.flat().some(item => isInternalItem(item) && item.isActive),
@@ -280,7 +279,7 @@ export default function useNavItems(): ReturnType {
         isActive: apiNavItems.some(item => isInternalItem(item) && item.isActive),
         subItems: apiNavItems,
       },
-      {
+      otherNavItems.length > 0 && {
         text: 'Other',
         icon: 'gear',
         isActive: otherNavItems.flat().some(item => isInternalItem(item) && item.isActive),

@@ -908,6 +908,13 @@ const schema = yup
     NEXT_PUBLIC_GROWTH_BOOK_CLIENT_KEY: yup.string(),
     NEXT_PUBLIC_ROLLBAR_CLIENT_TOKEN: yup.string(),
 
+    // 6. External UI envs
+    NEXT_PUBLIC_VERIFIED_CONTRACTS_ENABLED: yup.boolean(),
+    NEXT_PUBLIC_TOKENS_ENABLED: yup.boolean(),
+    NEXT_PUBLIC_TOKEN_TRANSFERS_ENABLED: yup.boolean(),
+    NEXT_PUBLIC_CONTRACT_VERIFICATION_ENABLED: yup.boolean(),
+    NEXT_PUBLIC_HIDE_FOOTER: yup.boolean(),
+
     // Misc
     NEXT_PUBLIC_USE_NEXT_JS_PROXY: yup.boolean(),
   })

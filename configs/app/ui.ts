@@ -69,6 +69,7 @@ const UI = Object.freeze({
     layout: (getEnvValue('NEXT_PUBLIC_NAVIGATION_LAYOUT') || 'vertical') as NavigationLayout,
   },
   footer: {
+    isHidden: getEnvValue('NEXT_PUBLIC_HIDE_FOOTER') === 'true' ? true : false,
     links: getExternalAssetFilePath('NEXT_PUBLIC_FOOTER_LINKS'),
     frontendVersion: getEnvValue('NEXT_PUBLIC_GIT_TAG'),
     frontendCommit: getEnvValue('NEXT_PUBLIC_GIT_COMMIT_SHA'),

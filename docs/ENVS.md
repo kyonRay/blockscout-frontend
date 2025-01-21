@@ -882,3 +882,21 @@ For obtaining the variables values please refer to [reCAPTCHA documentation](htt
 | --- | --- | --- | --- | --- | --- | --- |
 | NEXT_PUBLIC_RE_CAPTCHA_V3_APP_SITE_KEY | `string` | **DEPRECATED** Google reCAPTCHA v3 site key | - | - | `<your-secret>` | v1.36.0+ |
 | NEXT_PUBLIC_RE_CAPTCHA_APP_SITE_KEY | `string` | Google reCAPTCHA v2 site key | - | - | `<your-secret>` | v1.0.x+ |
+
+&nbsp;
+
+## External configuration
+
+### Features
+
+| Variable | Type| Description | Compulsoriness  | Default value | Example value | Version |
+| --- | --- | --- | --- | --- | --- | --- |
+| NEXT_PUBLIC_VERIFIED_CONTRACTS_ENABLED | `boolean` | Set to `true` to enable "Verified contracts" in the app | - | `false` | `true` | v1.37.3+ |
+| NEXT_PUBLIC_TOKENS_ENABLED | `boolean` | Set to `true` to enable "Tokens" in the app | - | `false` | `true` | v1.37.3+ |
+| NEXT_PUBLIC_TOKEN_TRANSFERS_ENABLED | `boolean` | Set to `true` to enable "Token transfers" in the app | - | `false` | `true` | v1.37.3+ |
+| NEXT_PUBLIC_CONTRACT_VERIFICATION_ENABLED | `boolean` | Set to `true` to enable "Verify Contract" in the app | - | `false` | `true` | v1.37.3+ |
+
+### UI
+| Variable | Type| Description | Compulsoriness  | Default value | Example value | Version |
+| --- | --- | --- | --- | --- | --- | --- |
+| NEXT_PUBLIC_HIDE_FOOTER | `boolean` | Set to `true` to hide footer | - | `false` | `true` | v1.37.3+ |

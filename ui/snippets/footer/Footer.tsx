@@ -181,6 +181,10 @@ const Footer = () => {
     );
   };
 
+  if (config.UI.footer.isHidden) {
+    return null;
+  }
+
   if (config.UI.footer.links) {
     return (
       <Box { ...containerProps }>

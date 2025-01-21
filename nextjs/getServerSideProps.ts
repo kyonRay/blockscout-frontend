@@ -67,6 +67,46 @@ export const verifiedAddresses: GetServerSideProps<Props> = async(context) => {
   return account(context);
 };
 
+export const contractVerification: GetServerSideProps<Props> = async(context) => {
+  if (!config.features.contractVerification.isEnabled) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return base(context);
+};
+
+export const tokens: GetServerSideProps<Props> = async(context) => {
+  if (!config.features.tokens.isEnabled) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return base(context);
+};
+
+export const tokenTransfers: GetServerSideProps<Props> = async(context) => {
+  if (!config.features.tokenTransfers.isEnabled) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return base(context);
+};
+
+export const verifiedContracts: GetServerSideProps<Props> = async(context) => {
+  if (!config.features.verifiedContracts.isEnabled) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return base(context);
+};
+
 const DEPOSITS_ROLLUP_TYPES: Array<RollupType> = [ 'optimistic', 'shibarium', 'zkEvm', 'arbitrum', 'scroll' ];
 export const deposits: GetServerSideProps<Props> = async(context) => {
   if (!(rollupFeature.isEnabled && DEPOSITS_ROLLUP_TYPES.includes(rollupFeature.type))) {
