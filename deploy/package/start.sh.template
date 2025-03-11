@@ -1,0 +1,3 @@
+#!/bin/bash
+docker load --input ./${IMAGE_NAME}.tar
+docker run -d --name "${IMAGE_NAME}" -p 3000:3000 --env-file .env -t "${IMAGE_NAME}:${VERSION}"
