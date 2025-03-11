@@ -56,3 +56,6 @@ yarn-error.log*
 
 # build outputs
 /tools/preset-sync/index.js
+
+deploy/package/output/*
+deploy/package/*.tar.gz
